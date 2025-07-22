@@ -1,10 +1,14 @@
 package com.nghcuong.todo_list.services.impl;
 
+import com.nghcuong.todo_list.config.JwtProvider;
+import com.nghcuong.todo_list.dto.TaskDTO;
 import com.nghcuong.todo_list.entity.Task;
 import com.nghcuong.todo_list.enums.Priority;
 import com.nghcuong.todo_list.enums.TaskStatus;
 import com.nghcuong.todo_list.repository.TaskRepository;
 import com.nghcuong.todo_list.services.TaskService;
+import com.nghcuong.todo_list.utils.UserUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -15,11 +19,18 @@ import java.util.Objects;
 @Service
 public class TaskServiceImpl extends GenericServiceImpl<Task, Long> implements TaskService {
 
+
+
     private final TaskRepository taskRepository;
 
     public TaskServiceImpl(TaskRepository taskRepository) {
         super(taskRepository);
         this.taskRepository = taskRepository;
+    }
+
+    @Override
+    public List<Task> findAll() {
+        return taskRepository.findByUserId(UserUtils.getCurrentUserId());
     }
 
     public List<Task> findByCategoryId(Long categoryId) {
@@ -44,15 +55,19 @@ public class TaskServiceImpl extends GenericServiceImpl<Task, Long> implements T
 
     private List<Task> findTaskDueToday() {
         LocalDate today = LocalDate.now();
-        return taskRepository.findTasksByDueDate(today);
+        return taskRepository.findTasksByDueDate(today, UserUtils.getCurrentUserId());
     }
 
     private List<Task> findTaskByPriority(Priority priority) {
-        return taskRepository.findTasksByPriority(priority);
+        return taskRepository.findTasksByPriority(priority, UserUtils.getCurrentUserId());
     }
 
     private List<Task> findTaskByStatus(TaskStatus taskStatus) {
-        return taskRepository.findTasksByStatus(taskStatus);
+        return taskRepository.findTasksByStatus(taskStatus, UserUtils.getCurrentUserId());
+    }
+
+    public int updateTaskStatusNative(Long id, TaskStatus status) {
+        return taskRepository.updateTaskStatusNative(id, status);
     }
 
 }

@@ -16,6 +16,11 @@ spring:
     hibernate:
       ddl-auto: update
 
+app:
+  jwt:
+    secret: todolist-secret-key-123456789012345678901234567890
+    expiration: 86400000
+
 server:
   port: 8080
   servlet:

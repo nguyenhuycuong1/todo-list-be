@@ -20,4 +20,6 @@ public class SubTaskDTO {
     LocalDateTime createdAt;
     @JsonProperty("updated_at")
     LocalDateTime updatedAt;
+    @JsonProperty("user_id")
+    Long userId;
 }

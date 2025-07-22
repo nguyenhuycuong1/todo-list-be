@@ -15,10 +15,9 @@ public class GlobalExceptionHandler {
         ApiResponse<?> apiResponse = new ApiResponse<>();
         apiResponse.setResult(Result.builder()
                         .responseCode(errorCode.getCode())
-                        .message(errorCode.getMessage())
+                        .message(e.getMessage())
                         .success(false)
                 .build());
-        return ResponseEntity.status(e.getErrorCode().getHttpStatus()).body(apiResponse);
+        return ResponseEntity.status(errorCode.getHttpStatus()).body(apiResponse);
     }
-
 }

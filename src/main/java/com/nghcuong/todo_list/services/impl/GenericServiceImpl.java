@@ -4,6 +4,7 @@ import com.nghcuong.todo_list.entity.BaseEntity;
 import com.nghcuong.todo_list.exception.AppException;
 import com.nghcuong.todo_list.exception.ErrorCode;
 import com.nghcuong.todo_list.services.IGenericService;
+import com.nghcuong.todo_list.utils.UserUtils;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDateTime;
@@ -16,9 +17,11 @@ public abstract class GenericServiceImpl<T, ID> implements IGenericService<T, ID
         this.repository = repository;
     }
 
+
     @Override
     public T save(T entity) {
         if(entity instanceof BaseEntity baseEntity) {
+            baseEntity.setUserId(UserUtils.getCurrentUserId());
             baseEntity.setCreatedAt(LocalDateTime.now());
             baseEntity.setUpdatedAt(LocalDateTime.now());
         }
@@ -57,6 +60,5 @@ public abstract class GenericServiceImpl<T, ID> implements IGenericService<T, ID
     public List<T> findAll() {
         return repository.findAll();
     }
-
 
 }

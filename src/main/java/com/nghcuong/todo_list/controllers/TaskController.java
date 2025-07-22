@@ -3,6 +3,7 @@ package com.nghcuong.todo_list.controllers;
 import com.nghcuong.todo_list.dto.TaskDTO;
 import com.nghcuong.todo_list.dto.response.ApiResponse;
 import com.nghcuong.todo_list.entity.Task;
+import com.nghcuong.todo_list.enums.TaskStatus;
 import com.nghcuong.todo_list.mapper.TaskMapper;
 import com.nghcuong.todo_list.services.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,5 +67,11 @@ public class TaskController {
         List<Task> tasks = taskService.quickFilter(keyword);
         List<TaskDTO> taskDTOs = taskMapper.toDTOs(tasks);
         return new ApiResponse<List<TaskDTO>>(taskDTOs).success();
+    }
+
+    @PutMapping("/update-status/{id}/{status}")
+    public ApiResponse<Integer> updateTaskStatus(@PathVariable Long id, @PathVariable TaskStatus status) {
+        int rows = taskService.updateTaskStatusNative(id, status);
+        return new ApiResponse<Integer>(rows).success();
     }
 }

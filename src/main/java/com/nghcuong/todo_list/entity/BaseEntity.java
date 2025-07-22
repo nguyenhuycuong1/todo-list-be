@@ -23,4 +23,6 @@ public class BaseEntity {
     LocalDateTime createdAt;
     @Column(name = "updated_at")
     LocalDateTime updatedAt;
+    @Column(name = "user_id")
+    Long userId;
 }
