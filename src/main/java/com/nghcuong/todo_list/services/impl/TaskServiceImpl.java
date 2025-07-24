@@ -8,6 +8,7 @@ import com.nghcuong.todo_list.enums.TaskStatus;
 import com.nghcuong.todo_list.repository.TaskRepository;
 import com.nghcuong.todo_list.services.TaskService;
 import com.nghcuong.todo_list.utils.UserUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Slf4j
 @Service
 public class TaskServiceImpl extends GenericServiceImpl<Task, Long> implements TaskService {
 
@@ -45,6 +47,7 @@ public class TaskServiceImpl extends GenericServiceImpl<Task, Long> implements T
         } else if (Objects.equals(keyword, "high-priority")) {
             return findTaskByPriority(Priority.HIGH);
         } else if (Objects.equals(keyword, "completed")) {
+            log.info("checking completed tasks");
             return findTaskByStatus(TaskStatus.DONE);
         } else if (Objects.equals(keyword, "in-progress")) {
             return findTaskByStatus(TaskStatus.IN_PROGRESS);
@@ -63,6 +66,7 @@ public class TaskServiceImpl extends GenericServiceImpl<Task, Long> implements T
     }
 
     private List<Task> findTaskByStatus(TaskStatus taskStatus) {
+        log.info("Finding tasks by status: {}", taskStatus);
         return taskRepository.findTasksByStatus(taskStatus, UserUtils.getCurrentUserId());
     }
 

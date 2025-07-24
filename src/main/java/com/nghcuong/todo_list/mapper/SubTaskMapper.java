@@ -8,7 +8,7 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface SubTaskMapper {
-    SubTaskDTO toDto(SubTask subTask);
     SubTask toEntity(SubTaskDTO subTaskDTO);
-    List<SubTaskDTO> toDtoList(List<SubTask> subTasks);
+    SubTaskDTO toDTO(SubTask subTask);
+    List<SubTaskDTO> toDTOList(List<SubTask> subTasks);
 }

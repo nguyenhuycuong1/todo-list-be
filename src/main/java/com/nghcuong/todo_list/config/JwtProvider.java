@@ -18,7 +18,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 @Slf4j
 @Component
@@ -44,7 +43,7 @@ public class JwtProvider {
 
     public String generateTokenFromUsername(String username) {
         SecretKey key = Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
-        UserDTO userDTO = userMapper.toUserDTO(userService.findByUsername(username));
+        UserDTO userDTO = userMapper.toDTO(userService.findByUsername(username));
         Map<String, Object> claims = new HashMap<>();
         claims.put("id", userDTO.getId());
         claims.put("email", userDTO.getEmail());

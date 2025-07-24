@@ -8,10 +8,10 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public enum TaskStatus {
 
-    PENDING("Mới tạo"),
-    IN_PROGRESS("Đang làm"),
-    DONE("Hoàn thành"),
-    LATE("Muộn");
+    PENDING("PENDING"),
+    IN_PROGRESS("IN_PROGRESS"),
+    DONE("DONE"),
+    LATE("LATE");
 
     String status;
 

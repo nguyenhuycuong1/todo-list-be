@@ -23,7 +23,9 @@ public enum ErrorCode {
     DUPLICATE_RESOURCE(409, "Tài nguyên đã tồn tại", HttpStatus.CONFLICT),
 
     // 500 INTERNAL SERVER ERROR
-    INTERNAL_SERVER_ERROR(500, "Lỗi hệ thống", HttpStatus.INTERNAL_SERVER_ERROR);
+    INTERNAL_SERVER_ERROR(500, "Lỗi hệ thống", HttpStatus.INTERNAL_SERVER_ERROR),
+
+    INVALID_TOKEN(4011, "Token không hợp lệ", HttpStatus.UNAUTHORIZED);
 
     private final int code;
     private final String message;

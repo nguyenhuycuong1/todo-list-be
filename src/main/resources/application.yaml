@@ -18,8 +18,9 @@ spring:
 
 app:
   jwt:
-    secret: todolist-secret-key-123456789012345678901234567890
-    expiration: 86400000
+    secret: todolist-secret-key-123123123123123123123123123
+    expiration: 3600000
+    refreshExpiration: 86400000
 
 server:
   port: 8080

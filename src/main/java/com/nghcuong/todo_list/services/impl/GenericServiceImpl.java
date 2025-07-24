@@ -37,6 +37,7 @@ public abstract class GenericServiceImpl<T, ID> implements IGenericService<T, ID
             baseEntity.setId((Long) id);
             baseEntity.setCreatedAt(((BaseEntity) existingEntity).getCreatedAt());
             baseEntity.setUpdatedAt(LocalDateTime.now());
+            baseEntity.setUserId(UserUtils.getCurrentUserId());
         }
 
         return repository.save(entity);

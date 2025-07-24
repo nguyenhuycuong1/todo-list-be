@@ -20,25 +20,25 @@ public class SubTaskController {
 
     @GetMapping("/get-all")
     public ApiResponse<List<SubTaskDTO>> getAllSubTasks() {
-        List<SubTaskDTO> subTasks = subTaskMapper.toDtoList(subTaskService.findAll());
+        List<SubTaskDTO> subTasks = subTaskMapper.toDTOList(subTaskService.findAll());
         return new ApiResponse<>(subTasks).success();
     }
 
     @GetMapping("/get-by-id/{id}")
     public ApiResponse<SubTaskDTO> getSubTaskById(@PathVariable Long id) {
-        SubTaskDTO subTask = subTaskMapper.toDto(subTaskService.findById(id));
+        SubTaskDTO subTask = subTaskMapper.toDTO(subTaskService.findById(id));
         return new ApiResponse<>(subTask).success();
     }
 
     @PostMapping("/create")
     public ApiResponse<SubTaskDTO> createSubTask(@RequestBody SubTaskDTO subTaskDTO) {
-        SubTaskDTO createdSubTask = subTaskMapper.toDto(subTaskService.save(subTaskMapper.toEntity(subTaskDTO)));
+        SubTaskDTO createdSubTask = subTaskMapper.toDTO(subTaskService.save(subTaskMapper.toEntity(subTaskDTO)));
         return new ApiResponse<>(createdSubTask).success();
     }
 
     @PutMapping("/update/{id}")
     public ApiResponse<SubTaskDTO> updateSubTask(@PathVariable Long id, @RequestBody SubTaskDTO subTaskDTO) {
-        SubTaskDTO updatedSubTask = subTaskMapper.toDto(subTaskService.update(id, subTaskMapper.toEntity(subTaskDTO)));
+        SubTaskDTO updatedSubTask = subTaskMapper.toDTO(subTaskService.update(id, subTaskMapper.toEntity(subTaskDTO)));
         return new ApiResponse<>(updatedSubTask).success();
     }
 
@@ -50,7 +50,7 @@ public class SubTaskController {
 
     @GetMapping("/get-by-task-id/{taskId}")
     public ApiResponse<List<SubTaskDTO>> getSubTasksByTaskId(@PathVariable Long taskId) {
-        List<SubTaskDTO> subTasks = subTaskMapper.toDtoList(subTaskService.findByTaskId(taskId));
+        List<SubTaskDTO> subTasks = subTaskMapper.toDTOList(subTaskService.findByTaskId(taskId));
         return new ApiResponse<>(subTasks).success();
     }
 }
